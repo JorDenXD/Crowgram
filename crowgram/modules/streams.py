@@ -11,6 +11,15 @@ from typing import Union
 from youtubesearchpython.__future__ import VideosSearch
 
 
+
+def cookiefile():
+    cookie_dir = "cookies"
+    cookies_files = [f for f in os.listdir(cookie_dir) if f.endswith(".txt")]
+
+    cookie_file = os.path.join(cookie_dir, cookies_files[0])
+    return cookie_file
+    
+
 def get_audio_name(audio: Union[Audio, Voice]):
     try:
         file_name = (
@@ -61,6 +70,8 @@ async def get_media_info(vidid: str, query: str):
 async def get_stream_link(link: str):
     proc = await asyncio.create_subprocess_exec(
         "yt-dlp",
+        "--cookies",
+        cookiefile(),
         "-g",
         "-f",
         "bestvideo+bestaudio/best",
