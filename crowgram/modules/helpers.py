@@ -1,6 +1,15 @@
 import asyncio, os, yt_dlp
 
 
+def cookiefile():
+    cookie_dir = "cookies"
+    cookies_files = [f for f in os.listdir(cookie_dir) if f.endswith(".txt")]
+
+    cookie_file = os.path.join(cookie_dir, cookies_files[0])
+    return cookie_file
+
+
+
 async def download_media_file(link: str, type: str):
     loop = asyncio.get_running_loop()
     if type == "Audio":
@@ -11,7 +20,7 @@ async def download_media_file(link: str, type: str):
             "nocheckcertificate": True,
             "quiet": True,
             "no_warnings": True,
-            "cookiefile": "cookies.txt",
+            "cookiefile": "cookiefile()",
         }
 
     elif type == "Video":
@@ -22,7 +31,7 @@ async def download_media_file(link: str, type: str):
             "nocheckcertificate": True,
             "quiet": True,
             "no_warnings": True,
-            "cookiefile": "cookies.txt",
+            "cookiefile": "cookiefile()",
         }
         
     x = yt_dlp.YoutubeDL(ydl_opts)
