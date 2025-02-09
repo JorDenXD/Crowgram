@@ -80,12 +80,14 @@ async def get_media_stream(media, type: str):
             media_path=media,
             video_flags=MediaStream.IGNORE,
             audio_parameters=AudioQuality.STUDIO,
+            ytdlp_parameters="--cookies cookies.txt",
         )
     elif type == "Video":
         stream = MediaStream(
             media_path=media,
             audio_parameters=AudioQuality.STUDIO,
             video_parameters=VideoQuality.HD_720p,
+            ytdlp_parameters="--cookies cookies.txt",
         )
             
     return stream
