@@ -1,4 +1,4 @@
-import asyncio, re, yt_dlp
+import asyncio, re, yt_dlp, os
 
 from crowgram import config
 from pyrogram.types import Audio, Voice
